@@ -1,0 +1,12 @@
+select s.name
+from SalesPerson as s
+where not exists(
+    select 1
+    from Orders as o
+    where s.sales_id=o.sales_id
+    and exists(
+        select 1
+        from Company as c
+        where c.com_id=o.com_id and c.name='RED'
+    )
+)
